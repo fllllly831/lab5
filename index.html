@@ -64,17 +64,27 @@
             color: #4e4376;
             cursor: pointer;
             transition: all 0.3s ease;
+        }
+        
+        .section-title-container {
             display: flex;
             align-items: center;
             gap: 10px;
         }
         
-        .section-title:hover {
-            transform: translateY(-5px);
-            color: #2b5876;
+        .section-title-container .icon {
+            transition: transform 0.3s ease;
         }
         
-        .section-content {
+        .section:hover .icon {
+            transform: skewX(20deg);
+        }
+        
+        .section:hover .title-text {
+            transform: translateX(300%);
+        }
+        
+        .form-wrapper {
             display: flex;
             flex-wrap: wrap;
             gap: 15px;
@@ -84,32 +94,30 @@
             flex: 1 1 calc(50% - 30px);
             min-width: 200px;
             animation: fadeIn 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column;
         }
         
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
+        .input-container {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .input-container label {
+            width: 100px;
+            margin-right: 10px;
             font-weight: bold;
             color: #555;
         }
         
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px;
+        .input-container input,
+        .input-container select {
+            flex: 1;
+            padding: 10px;
             border: 1px solid #ddd;
-            border-radius: 6px;
+            border-radius: 4px;
             font-size: 16px;
-            transition: all 0.3s ease;
-        }
-        
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #4e4376;
-            box-shadow: 0 0 10px rgba(78, 67, 118, 0.2);
         }
         
         .photo-container {
@@ -268,6 +276,11 @@
         textarea {
             resize: vertical;
             min-height: 100px;
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
         }
         
         /* 动画效果 */
@@ -322,25 +335,6 @@
             100% { transform: scale(1, 1); }
         }
         
-        @keyframes wobble {
-            0% { transform: translateX(0); }
-            15% { transform: translateX(-10px); }
-            30% { transform: translateX(10px); }
-            45% { transform: translateX(-5px); }
-            60% { transform: translateX(5px); }
-            75% { transform: translateX(-3px); }
-            90% { transform: translateX(3px); }
-            100% { transform: translateX(0); }
-        }
-        
-        @keyframes heartBeat {
-            0% { transform: scale(1); }
-            14% { transform: scale(1.3); }
-            28% { transform: scale(1); }
-            42% { transform: scale(1.3); }
-            70% { transform: scale(1); }
-        }
-        
         /* 响应式设计 */
         @media (max-width: 768px) {
             .form-group {
@@ -361,223 +355,281 @@
         </header>
         
         <div class="resume-content">
-            <div class="section">
-                <div class="section-title">
-                    <i class="fas fa-user"></i> 基本信息
-                </div>
-                <div class="section-content">
-                    <div class="form-group">
-                        <label for="name">姓名</label>
-                        <input type="text" id="name" value="刘峻泽" maxlength="20">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="gender">性别</label>
-                        <select id="gender">
-                            <option value="男" selected>男</option>
-                            <option value="女">女</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="age">年龄</label>
-                        <input type="number" id="age" value="20" min="18" max="100">
-                    </div>
-                    
-                    <div class="photo-container">
-                        <div class="photo-preview">
-                            <img id="photoPreview" src="个人照片.jpg" alt="照片预览">
+            <form id="resumeForm">
+                <div class="section">
+                    <div class="section-title">
+                        <div class="section-title-container">
+                            <i class="fas fa-user icon"></i>
+                            <span class="title-text">基本信息</span>
                         </div>
-                        <input type="file" id="photo" class="photo-upload" accept="image/*">
                     </div>
-                </div>
-            </div>
-            
-            <div class="section">
-                <div class="section-title">
-                    <i class="fas fa-home"></i> 联系方式
-                </div>
-                <div class="section-content">
-                    <div class="form-group">
-                        <label for="hometown">籍贯</label>
-                        <input type="text" id="hometown" value="山东滕州" maxlength="20">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="phone">联系电话</label>
-                        <input type="tel" id="phone" value="16572523689" maxlength="11">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="email">电子邮箱</label>
-                        <input type="email" id="email" value="2909889842@qq.com" maxlength="50">
-                    </div>
-                </div>
-            </div>
-            
-            <div class="section">
-                <div class="section-title">
-                    <i class="fas fa-graduation-cap"></i> 教育背景
-                </div>
-                <div class="section-content">
-                    <div class="form-group">
-                        <label for="education">学历</label>
-                        <select id="education">
-                            <option value="本科" selected>本科</option>
-                            <option value="硕士">硕士</option>
-                            <option value="博士">博士</option>
-                            <option value="专科">专科</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="health">健康状况</label>
-                        <select id="health">
-                            <option value="健康" selected>健康</option>
-                            <option value="亚健康">亚健康</option>
-                            <option value="不健康">不健康</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="marital">婚姻状况</label>
-                        <select id="marital">
-                            <option value="未婚" selected>未婚</option>
-                            <option value="已婚">已婚</option>
-                            <option value="离异">离异</option>
-                            <option value="丧偶">丧偶</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="section">
-                <div class="section-title">
-                    <i class="fas fa-briefcase"></i> 求职意向
-                </div>
-                <div class="section-content">
-                    <div class="form-group">
-                        <label for="job-intent">求职意向</label>
-                        <input type="text" id="job-intent" value="前端工程师" maxlength="30">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="major">专业</label>
-                        <select id="major">
-                            <option value="软件工程" selected>软件工程</option>
-                            <option value="计算机科学与技术">计算机科学与技术</option>
-                            <option value="人工智能">人工智能</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="university">毕业院校</label>
-                        <input type="text" id="university" value="鲁东大学" maxlength="30">
-                    </div>
-                </div>
-            </div>
-            
-            <div class="section">
-                <div class="section-title">
-                    <i class="fas fa-certificate"></i> 技能证书
-                </div>
-                <div class="section-content">
-                    <div class="skill-container">
-                        <div class="skill-item">
-                            <input type="checkbox" id="skill1" checked>
-                            <label for="skill1"></label>
-                            <input type="text" value="办公软件熟练使用" maxlength="50">
+                    <div class="form-wrapper">
+                        <div class="form-group">
+                            <div class="input-container">
+                                <label for="name">姓名</label>
+                                <input type="text" id="name" name="name" value="刘峻泽" maxlength="20">
+                            </div>
                         </div>
                         
-                        <div class="skill-item">
-                            <input type="checkbox" id="skill2" checked>
-                            <label for="skill2"></label>
-                            <input type="text" value="英语四级证书" maxlength="50">
+                        <div class="form-group">
+                            <div class="input-container">
+                                <label for="gender">性别</label>
+                                <select id="gender" name="gender">
+                                    <option value="男" selected>男</option>
+                                    <option value="女">女</option>
+                                </select>
+                            </div>
                         </div>
                         
-                        <div class="skill-item">
-                            <input type="checkbox" id="skill3" checked>
-                            <label for="skill3"></label>
-                            <input type="text" value="熟悉Linux操作系统" maxlength="50">
+                        <div class="form-group">
+                            <div class="input-container">
+                                <label for="age">年龄</label>
+                                <input type="number" id="age" name="age" value="20" min="18" max="100">
+                            </div>
                         </div>
                         
-                        <div class="skill-item">
-                            <input type="checkbox" id="skill4" checked>
-                            <label for="skill4"></label>
-                            <input type="text" value="前端开发技能：HTML5、CSS3、JavaScript、React" maxlength="100">
+                        <div class="photo-container">
+                            <div class="photo-preview">
+                                <img id="photoPreview" src="个人照片.jpg" alt="照片预览">
+                            </div>
+                            <input type="file" id="photo" name="photo" class="photo-upload" accept="image/*">
                         </div>
-                        
-                        <div class="skill-item">
-                            <input type="checkbox" id="skill5" checked>
-                            <label for="skill5"></label>
-                            <input type="text" value="编程语言：Python、C++" maxlength="50">
-                        </div>
-                        
-                        <button class="add-button" onclick="addSkill()">
-                            <i class="fas fa-plus"></i> 添加技能
-                        </button>
                     </div>
                 </div>
-            </div>
-            
-            <div class="section">
-                <div class="section-title">
-                    <i class="fas fa-project-diagram"></i> 项目经历
-                </div>
-                <div class="section-content">
-                    <div class="project-container">
-                        <div class="project-item">
-                            <input type="checkbox" id="project1" checked>
-                            <label for="project1"></label>
-                            <input type="text" value="独立开发了一个学生管理系统，使用Python和Django框架" maxlength="100">
+                
+                <div class="section">
+                    <div class="section-title">
+                        <div class="section-title-container">
+                            <i class="fas fa-home icon"></i>
+                            <span class="title-text">联系方式</span>
+                        </div>
+                    </div>
+                    <div class="form-wrapper">
+                        <div class="form-group">
+                            <div class="input-container">
+                                <label for="hometown">籍贯</label>
+                                <input type="text" id="hometown" name="hometown" value="山东滕州" maxlength="20">
+                            </div>
                         </div>
                         
-                        <div class="project-item">
-                            <input type="checkbox" id="project2" checked>
-                            <label for="project2"></label>
-                            <input type="text" value="前端开发，使用HTML5、CSS3和JavaScript" maxlength="100">
+                        <div class="form-group">
+                            <div class="input-container">
+                                <label for="phone">联系电话</label>
+                                <input type="tel" id="phone" name="phone" value="16572523689" maxlength="11">
+                            </div>
                         </div>
                         
-                        <div class="project-item">
-                            <input type="checkbox" id="project3" checked>
-                            <label for="project3"></label>
-                            <input type="text" value="参与开发了一款2D平台跳跃游戏，使用Unity引擎" maxlength="100">
+                        <div class="form-group">
+                            <div class="input-container">
+                                <label for="email">电子邮箱</label>
+                                <input type="email" id="email" name="email" value="2909889842@qq.com" maxlength="50">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <div class="section-title">
+                        <div class="section-title-container">
+                            <i class="fas fa-graduation-cap icon"></i>
+                            <span class="title-text">教育背景</span>
+                        </div>
+                    </div>
+                    <div class="form-wrapper">
+                        <div class="form-group">
+                            <div class="input-container">
+                                <label for="education">学历</label>
+                                <select id="education" name="education">
+                                    <option value="本科" selected>本科</option>
+                                    <option value="硕士">硕士</option>
+                                    <option value="博士">博士</option>
+                                    <option value="专科">专科</option>
+                                </select>
+                            </div>
                         </div>
                         
-                        <button class="add-button" onclick="addProject()">
-                            <i class="fas fa-plus"></i> 添加项目
-                        </button>
+                        <div class="form-group">
+                            <div class="input-container">
+                                <label for="health">健康状况</label>
+                                <select id="health" name="health">
+                                    <option value="健康" selected>健康</option>
+                                    <option value="亚健康">亚健康</option>
+                                    <option value="不健康">不健康</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="input-container">
+                                <label for="marital">婚姻状况</label>
+                                <select id="marital" name="marital">
+                                    <option value="未婚" selected>未婚</option>
+                                    <option value="已婚">已婚</option>
+                                    <option value="离异">离异</option>
+                                    <option value="丧偶">丧偶</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            
-            <div class="section">
-                <div class="section-title">
-                    <i class="fas fa-heart"></i> 个人特长与爱好
-                </div>
-                <div class="section-content">
-                    <div class="form-group">
-                        <textarea id="hobby" maxlength="200">喜欢探索不同文化；擅长风景和人像摄影，作品曾参加活动；喜欢阅读科技类书籍和小说，定期参加读书俱乐部</textarea>
-                        <button class="clear-button" onclick="clearHobby()">清除</button>
+                
+                <div class="section">
+                    <div class="section-title">
+                        <div class="section-title-container">
+                            <i class="fas fa-briefcase icon"></i>
+                            <span class="title-text">求职意向</span>
+                        </div>
+                    </div>
+                    <div class="form-wrapper">
+                        <div class="form-group">
+                            <div class="input-container">
+                                <label for="job-intent">求职意向</label>
+                                <input type="text" id="job-intent" name="jobIntent" value="前端工程师" maxlength="30">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="input-container">
+                                <label for="major">专业</label>
+                                <select id="major" name="major">
+                                    <option value="软件工程" selected>软件工程</option>
+                                    <option value="计算机科学与技术">计算机科学与技术</option>
+                                    <option value="人工智能">人工智能</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="input-container">
+                                <label for="university">毕业院校</label>
+                                <input type="text" id="university" name="university" value="鲁东大学" maxlength="30">
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            
-            <div class="section">
-                <div class="section-title">
-                    <i class="fas fa-user-cog"></i> 自我评价
-                </div>
-                <div class="section-content">
-                    <div class="form-group">
-                        <textarea id="selfEvaluation" maxlength="500">我是一名积极向上的大一学生，对学习充满热情，具备良好的团队协作能力和沟通能力。在大学期间，我积极参与社团活动和志愿者服务，锻炼了自己的组织能力和责任感。我擅长使用办公软件和编程语言，能够快速适应新环境并解决实际问题。在未来的学习和工作中，我希望能够不断提升自己的专业能力，为团队和社会做出贡献。我系统掌握了C语言、Python编程基础，熟悉数据结构与算法逻辑，能够独立完成小型项目开发（如学生管理系统）。曾参与团队课程设计，负责模块代码编写与文档整理，具备良好的协作与沟通能力。目前自学前端开发（HTML/CSS/JavaScript），通过GitHub管理代码版本，持续更新技术博客记录学习心得。对技术迭代保持敏锐度，定期阅读《代码整洁之道》等专业书籍，关注人工智能领域动态。擅长通过Stack Overflow等平台解决技术难题，注重代码规范与可维护性。具备快速学习能力，2周内掌握Django框架并完成个人博客搭建。性格踏实严谨，适应高强度学习节奏，未来计划深入后端开发方向，目标通过参与开源项目积累工程经验，逐步成长为全栈工程师。</textarea>
-                        <button class="clear-button" onclick="clearSelfEvaluation()">清除</button>
+                
+                <div class="section">
+                    <div class="section-title">
+                        <div class="section-title-container">
+                            <i class="fas fa-certificate icon"></i>
+                            <span class="title-text">技能证书</span>
+                        </div>
+                    </div>
+                    <div class="form-wrapper">
+                        <div class="form-group" style="flex: 1 1 100%;">
+                            <div class="skill-container">
+                                <div class="skill-item">
+                                    <input type="checkbox" id="skill1" name="skill1" checked>
+                                    <label for="skill1"></label>
+                                    <input type="text" value="办公软件熟练使用" maxlength="50">
+                                </div>
+                                
+                                <div class="skill-item">
+                                    <input type="checkbox" id="skill2" name="skill2" checked>
+                                    <label for="skill2"></label>
+                                    <input type="text" value="英语四级证书" maxlength="50">
+                                </div>
+                                
+                                <div class="skill-item">
+                                    <input type="checkbox" id="skill3" name="skill3" checked>
+                                    <label for="skill3"></label>
+                                    <input type="text" value="熟悉Linux操作系统" maxlength="50">
+                                </div>
+                                
+                                <div class="skill-item">
+                                    <input type="checkbox" id="skill4" name="skill4" checked>
+                                    <label for="skill4"></label>
+                                    <input type="text" value="前端开发技能：HTML5、CSS3、JavaScript、React" maxlength="100">
+                                </div>
+                                
+                                <div class="skill-item">
+                                    <input type="checkbox" id="skill5" name="skill5" checked>
+                                    <label for="skill5"></label>
+                                    <input type="text" value="编程语言：Python、C++" maxlength="50">
+                                </div>
+                                
+                                <button type="button" class="add-button" onclick="addSkill()">
+                                    <i class="fas fa-plus"></i> 添加技能
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            
-            <button class="submit-button">
-                <i class="fas fa-paper-plane"></i> 提交
-            </button>
+                
+                <div class="section">
+                    <div class="section-title">
+                        <div class="section-title-container">
+                            <i class="fas fa-project-diagram icon"></i>
+                            <span class="title-text">项目经历</span>
+                        </div>
+                    </div>
+                    <div class="form-wrapper">
+                        <div class="form-group" style="flex: 1 1 100%;">
+                            <div class="project-container">
+                                <div class="project-item">
+                                    <input type="checkbox" id="project1" name="project1" checked>
+                                    <label for="project1"></label>
+                                    <input type="text" value="独立开发了一个学生管理系统，使用Python和Django框架" maxlength="100">
+                                </div>
+                                
+                                <div class="project-item">
+                                    <input type="checkbox" id="project2" name="project2" checked>
+                                    <label for="project2"></label>
+                                    <input type="text" value="前端开发，使用HTML5、CSS3和JavaScript" maxlength="100">
+                                </div>
+                                
+                                <div class="project-item">
+                                    <input type="checkbox" id="project3" name="project3" checked>
+                                    <label for="project3"></label>
+                                    <input type="text" value="参与开发了一款2D平台跳跃游戏，使用Unity引擎" maxlength="100">
+                                </div>
+                                
+                                <button type="button" class="add-button" onclick="addProject()">
+                                    <i class="fas fa-plus"></i> 添加项目
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <div class="section-title">
+                        <div class="section-title-container">
+                            <i class="fas fa-heart icon"></i>
+                            <span class="title-text">个人爱好</span>
+                        </div>
+                    </div>
+                    <div class="form-wrapper">
+                        <div class="form-group" style="flex: 1 1 100%;">
+                            <div class="input-container">
+                                <textarea id="hobby" name="hobby" maxlength="200">喜欢探索不同文化；擅长风景和人像摄影，作品曾参加活动；喜欢阅读科技类书籍和小说，定期参加读书俱乐部</textarea>
+                                <button type="button" class="clear-button" onclick="clearHobby()" style="margin-top: 10px;">清除</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <div class="section-title">
+                        <div class="section-title-container">
+                            <i class="fas fa-user-cog icon"></i>
+                            <span class="title-text">自我评价</span>
+                        </div>
+                    </div>
+                    <div class="form-wrapper">
+                        <div class="form-group" style="flex: 1 1 100%;">
+                            <div class="input-container">
+                                <textarea id="selfEvaluation" name="selfEvaluation" maxlength="500">我是一名积极向上的大一学生，对学习充满热情，具备良好的团队协作能力和沟通能力。在大学期间，我积极参与社团活动和志愿者服务，锻炼了自己的组织能力和责任感。我擅长使用办公软件和编程语言，能够快速适应新环境并解决实际问题。在未来的学习和工作中，我希望能够不断提升自己的专业能力，为团队和社会做出贡献。我系统掌握了C语言、Python编程基础，熟悉数据结构与算法逻辑，能够独立完成小型项目开发（如学生管理系统）。曾参与团队课程设计，负责模块代码编写与文档整理，具备良好的协作与沟通能力。目前自学前端开发（HTML/CSS/JavaScript），通过GitHub管理代码版本，持续更新技术博客记录学习心得。对技术迭代保持敏锐度，定期阅读《代码整洁之道》等专业书籍，关注人工智能领域动态。擅长通过Stack Overflow等平台解决技术难题，注重代码规范与可维护性。具备快速学习能力，2周内掌握Django框架并完成个人博客搭建。性格踏实严谨，适应高强度学习节奏，未来计划深入后端开发方向，目标通过参与开源项目积累工程经验，逐步成长为全栈工程师。</textarea>
+                                <button type="button" class="clear-button" onclick="clearSelfEvaluation()" style="margin-top: 10px;">清除</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="submit" class="submit-button">
+                    <i class="fas fa-paper-plane"></i> 提交
+                </button>
+            </form>
         </div>
     </div>
     
@@ -625,6 +677,13 @@
         function clearSelfEvaluation() {
             document.getElementById('selfEvaluation').value = '';
         }
+        
+        // 表单提交处理
+        document.getElementById('resumeForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            // 在这里处理表单提交逻辑
+            alert('表单已提交！');
+        });
     </script>
 </body>
 </html>
